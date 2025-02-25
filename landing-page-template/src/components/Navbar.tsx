@@ -29,10 +29,10 @@ const Navbar: React.FC = () => {
                 </li>
                 <li className="ml-6">
                     <a
-                        href="#Pricing"
-                        onClick={(e) => handleLinkClick(e, '#Pricing')}
+                        href="#Drones"
+                        onClick={(e) => handleLinkClick(e, '#Drones')}
                     >
-                        Pricing
+                        Drones
                     </a>
                 </li>
                 <li className="ml-6">
