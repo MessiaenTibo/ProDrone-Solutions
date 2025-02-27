@@ -17,7 +17,7 @@ export default function Contact() {
                         <label htmlFor="firstName" className="mb-2 font-medium">FirstName</label>
                         <input type="text" id="firstName" name="firstName" placeholder="Jhon" className="p-2 border border-gray-300 rounded" required />
                     </div>
-                    <div className="flex flex-col w-full md:w-1/2 mb-4 md:mb-0">
+                    <div className="flex flex-col w-full md:w-1/2 ">
                         <label htmlFor="lastName" className="mb-2 font-medium">LastName</label>
                         <input type="lastName" id="lastName" name="lastName" placeholder="Doe" className="p-2 border border-gray-300 rounded" required />
                     </div>
@@ -28,7 +28,7 @@ export default function Contact() {
                 </div>
                 <div className="flex flex-col w-full">
                     <label htmlFor="message" className="mb-2 font-medium">Message</label>
-                    <textarea name="message" id="message" placeholder="Hey, I got some extra questions about the drones." className="p-2 border border-gray-300 rounded" required></textarea>
+                    <textarea name="message" id="message" placeholder="Hey, I got some extra questions about the drones." className="p-2 border border-gray-300 rounded min-h-20 md:min-h-40" required></textarea>
                 </div>
                 <button className="px-6 py-3  bg-blue-600 text-white rounded-lg font-medium">Submit</button>
             </form>
