@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
-import Pricing from "./components/Drones";
+import Drones from "./components/Drones";
 import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
@@ -12,8 +12,8 @@ export default function Home() {
         <div className="min-h-screen bg-gray-100 text-gray-900">
             <Navbar />
             <Hero />
+            <Drones />
             <Features />
-            <Pricing />
             <Testimonials />
             <FAQ />
             <Contact />
