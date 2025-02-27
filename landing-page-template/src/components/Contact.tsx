@@ -1,8 +1,8 @@
 export default function Contact() {
     return (
-        <section id="Contact" className="py-20 bg-white">
+        <section id="Contact" className="py-20 bg-gray-50">
             <h2 className="text-3xl font-bold mb-6 text-center">Contact</h2>
-            <form action="submit" className="flex flex-col p-6 gap-4 mx-auto rounded-md bg-gray-50 max-w-md md:max-w-xl lg:max-w-4xl lg:gap-8 lg:p-8 ">
+            <form action="submit" className="flex flex-col p-6 gap-4 shadow-md mx-auto rounded-md bg-white max-w-md md:max-w-xl lg:max-w-4xl lg:gap-8 lg:p-8 ">
                 <div className="flex flex-col md:flex-row justify-between items-center md:gap-4">
                     <div className="flex flex-col w-full md:w-1/2 mb-4 md:mb-0">
                         <label htmlFor="firstName" className="mb-2 font-medium">FirstName</label>

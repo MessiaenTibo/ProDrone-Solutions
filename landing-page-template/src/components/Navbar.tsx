@@ -21,18 +21,18 @@ const Navbar: React.FC = () => {
             <ul className="flex items-center">
                 <li className="ml-6">
                     <a
-                        href="#Features"
-                        onClick={(e) => handleLinkClick(e, '#Features')}
-                    >
-                        Features
-                    </a>
-                </li>
-                <li className="ml-6">
-                    <a
                         href="#Drones"
                         onClick={(e) => handleLinkClick(e, '#Drones')}
                     >
                         Drones
+                    </a>
+                </li>
+                <li className="ml-6">
+                    <a
+                        href="#Features"
+                        onClick={(e) => handleLinkClick(e, '#Features')}
+                    >
+                        Features
                     </a>
                 </li>
                 <li className="ml-6">
