@@ -4,7 +4,7 @@ export default function Contact() {
         // Prevent the default submit action, which is to reload the page
         e.preventDefault();
 
-        /* Replace with custom logic to handle contact*/
+        /* Replace with your own logic*/
         alert("Form Submitted" + "\nFirstName: " + e.target.firstName.value + "\nLastName: " + e.target.lastName.value + "\nEmail: " + e.target.email.value + "\nMessage: " + e.target.message.value);
 
         // Clear the form
