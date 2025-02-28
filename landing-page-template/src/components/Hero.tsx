@@ -58,8 +58,8 @@ const Hero: React.FC = () => {
                     <h1 className="text-5xl font-bold text-white mb-4">Flying drones creates memories</h1>
                     <p className="text-lg text-white mb-6">We sell and repair drones all over the world to make dreams come true</p>
                     <a
-                        href="#Pricing"
-                        onClick={(e) => handleLinkClick(e, '#Pricing')}
+                        href="#Drones"
+                        onClick={(e) => handleLinkClick(e, '#Drones')}
                         className="px-6 py-3 text-lg bg-blue-600 text-white rounded-lg"
                     >
                         Drones
