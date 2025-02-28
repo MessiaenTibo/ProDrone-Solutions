@@ -11,7 +11,6 @@ interface ReviewCardProps {
 
 const ReviewCard: React.FC<ReviewCardProps> = ({ name, image, rating, title, text, rowSpan }) => {
     const cardRef = useRef<HTMLDivElement | null>(null);
-    const [isVisible, setIsVisible] = useState(false);
     const [titleVisible, setTitleVisible] = useState(false);
     const [textVisible, setTextVisible] = useState(false);
 
@@ -19,7 +18,6 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ name, image, rating, title, tex
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    setIsVisible(true);
                     // Trigger title and text animations with a slight delay
                     setTimeout(() => setTitleVisible(true), 100);  // Delay for title
                     setTimeout(() => setTextVisible(true), 300);   // Delay for text
