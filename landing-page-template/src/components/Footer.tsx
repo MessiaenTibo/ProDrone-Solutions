@@ -10,8 +10,8 @@ export default function Footer() {
     };
 
     return (
-        <footer className="py-6 bg-gray-900 text-center text-white">
-            <div className="flex justify-center gap-20 flex-wrap">
+        <footer className="p-6 bg-gray-900 text-center text-white">
+            <div className="flex justify-between gap-20 max-w-4xl mx-auto flex-wrap">
                 {/* Contact Info */}
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
@@ -79,7 +79,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <p className="border-t border-gray-200 pt-6 mt-6">
+            <p className="border-t border-gray-200 pt-6 mt-6 -mx-6">
                 &copy; {new Date().getFullYear()} ProDrone Solutions. All rights reserved.
             </p>
         </footer>
