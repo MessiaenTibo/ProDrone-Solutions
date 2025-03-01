@@ -2,11 +2,27 @@ import { useEffect, useState, useRef } from 'react';
 
 const Hero: React.FC = () => {
     // State to track if the content is visible (for animation effect)
+    const [scale, setScale] = useState(1);
     const [isVisible, setIsVisible] = useState(false);
     const contentRef = useRef<HTMLDivElement | null>(null);
 
-    // Detect when the content enters the viewport and trigger animation
     useEffect(() => {
+        // Update the video scale based on the window size
+        const updateScale = () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight - 64; // Adjust for navbar height
+            const aspectRatio = 16 / 9;
+            const scaleValue = Math.max(width / (height * aspectRatio), height / (width / aspectRatio));
+            setScale(scaleValue);
+        };
+
+        // Add event listener for window resize to update the scale
+        window.addEventListener('resize', updateScale);
+
+        // Initial update of the scale
+        updateScale();
+
+        // Detect when the content enters the viewport and trigger animation
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -21,6 +37,8 @@ const Hero: React.FC = () => {
         }
 
         return () => {
+            // Cleanup the event listeners and observer
+            window.removeEventListener('resize', updateScale);
             if (contentRef.current) {
                 observer.disconnect();
             }
@@ -34,7 +52,7 @@ const Hero: React.FC = () => {
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
                     <iframe
                         className="absolute top-1/2 left-1/2 pointer-events-none"
-                        style={{ transform: 'translate(-50%, -50%) scale(1)', width: '200%', height: '200%' }}
+                        style={{ transform: `translate(-50%, -50%) scale(${scale})`, width: '200%', height: '200%' }}
                         src="https://www.youtube.com/embed/o_Ci_S28Xso?autoplay=1&mute=1&loop=1&playlist=o_Ci_S28Xso&controls=0&showinfo=0&modestbranding=1&start=1&vq=tiny"
                         title="Croatia Bilice - Epic Drone Footage"
                         allow="autoplay; fullscreen"
@@ -85,3 +103,4 @@ const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, target: str
 };
 
 export default Hero;
+
