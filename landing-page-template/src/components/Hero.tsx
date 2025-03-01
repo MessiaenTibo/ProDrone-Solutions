@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 
 const Hero: React.FC = () => {
+    // State to track if the content is visible (for animation effect)
     const [isVisible, setIsVisible] = useState(false);
     const contentRef = useRef<HTMLDivElement | null>(null);
 
-    // Detect when the content enters the viewport
+    // Detect when the content enters the viewport and trigger animation
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -12,7 +13,7 @@ const Hero: React.FC = () => {
                     setIsVisible(true); // Set the content to visible when it enters the viewport
                 }
             },
-            { threshold: 0.3 } // Trigger the observer when 30% of the element is in view
+            { threshold: 0.3 } // Start animation when 30% of the element is visible
         );
 
         if (contentRef.current) {
@@ -28,7 +29,7 @@ const Hero: React.FC = () => {
 
     return (
         <section className="relative flex flex-col items-center justify-center h-[calc(100vh-64px)] text-center px-6 overflow-hidden">
-            {/* Video Background */}
+            {/* Video Background - You should replace the YouTube video link with your own brand video */}
             <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
                     <iframe
@@ -43,18 +44,20 @@ const Hero: React.FC = () => {
                 </div>
             </div>
 
-            {/* Dark Overlay with soft box-shadow effect */}
+            {/* Dark Overlay to improve text visibility - You can adjust opacity or remove it if needed */}
             <div className="absolute inset-0 bg-black opacity-40 z-0 shadow-lg"></div>
 
-            {/* Content Overlay */}
+            {/* Content Overlay (Text & Button) */}
             <div
                 ref={contentRef}
                 className={`relative z-20 p-8 rounded-lg transition-transform duration-1000 ease-out ${isVisible ? 'animate-scaleUp' : 'opacity-0'}`}
             >
-                {/* Content - Text and Button */}
+                {/* Main Heading - You should customize this with your own brand message */}
                 <div className="relative z-10">
                     <h1 className="text-5xl font-bold text-white mb-4">Flying drones creates memories</h1>
+                    {/* Subheading - Can be modified to describe your business offering */}
                     <p className="text-lg text-white mb-6">We sell and repair drones all over the world to make dreams come true</p>
+                    {/* Call-to-Action Button - You should update the link and text based on your needs */}
                     <a
                         href="#Drones"
                         onClick={(e) => handleLinkClick(e, '#Drones')}
@@ -68,7 +71,8 @@ const Hero: React.FC = () => {
     );
 };
 
-// Smooth scroll on anchor link click
+// Smooth scroll function for anchor link clicks
+// You can add more target elements as needed
 const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, target: string): void => {
     event.preventDefault();
     const targetElement = document.querySelector(target) as HTMLElement;

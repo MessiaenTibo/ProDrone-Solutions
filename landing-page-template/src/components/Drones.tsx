@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
+// Define the Drone interface to ensure consistent data structure
 interface Drone {
     name: string;
     price: string;
@@ -8,6 +9,7 @@ interface Drone {
 }
 
 export default function Drones() {
+    // List of drones - You can update this with your own products
     const drones: Drone[] = [
         { name: "ShadowViper", price: "$699", image: "/src/assets/images/ShadowViper.webp", category: "Beginner" },
         { name: "NightOwl", price: "$1299", image: "/src/assets/images/NightOwl.webp", category: "Advanced" },
@@ -16,7 +18,10 @@ export default function Drones() {
 
     return (
         <section id="Drones" className="py-20 bg-gray-50">
+            {/* Section title - Modify as needed */}
             <h2 className="text-3xl font-bold mb-6 text-center">Drones</h2>
+
+            {/* Grid layout for displaying drones */}
             <div className="grid w-fit m-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-20">
                 {drones.map((drone, index) => (
                     <DroneCard key={index} drone={drone} index={index} />
@@ -26,10 +31,12 @@ export default function Drones() {
     );
 }
 
+// Component to display individual drone cards
 function DroneCard({ drone, index }: { drone: Drone; index: number }) {
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef<HTMLDivElement | null>(null);
 
+    // Intersection Observer to trigger animation when the card is in view
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -52,19 +59,24 @@ function DroneCard({ drone, index }: { drone: Drone; index: number }) {
                 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}
             `}
         >
+            {/* Image with hover effect - Replace with your own product images */}
             <div className="overflow-hidden">
                 <img
+                    draggable="false"
                     src={drone.image}
                     alt={`Picture of the ${drone.name} drone`}
                     className="hover:scale-110 transition-transform duration-500 ease-out"
                     style={{ width: "100%", height: "auto" }}
                 />
             </div>
+
+            {/* Drone details */}
             <div className="p-2 md:p-4">
                 <p className="text-gray-600 pb-2">{drone.category}</p>
                 <h3 className="text-xl font-semibold">{drone.name}</h3>
                 <div className="flex justify-between items-center mt-5">
                     <p className="text-2xl font-bold">{drone.price}</p>
+                    {/* Purchase button - Link this to your store or checkout page */}
                     <button className="px-6 py-3 bg-blue-600 text-white rounded-lg">Buy Now</button>
                 </div>
             </div>

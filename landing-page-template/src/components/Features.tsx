@@ -2,6 +2,7 @@ import { Zap, Webcam, Rotate3D, BatteryFull, BatteryCharging, MapPinHouse } from
 import FeatureItem from "./FeatureItem";
 import { JSX } from "react";
 
+// Define the Feature interface to structure the feature data
 interface Feature {
     title: string;
     description: string;
@@ -9,6 +10,7 @@ interface Feature {
 }
 
 export default function Features() {
+    // List of drone features - You can modify or add more as needed
     const features: Feature[] = [
         {
             title: "Return to Home",
@@ -45,7 +47,10 @@ export default function Features() {
     return (
         <section id="Features" className="py-20 bg-white">
             <div className="max-w-6xl mx-auto">
+                {/* Section title - You can customize the heading */}
                 <h2 className="text-3xl font-bold mb-6 text-center">Our Key Features</h2>
+
+                {/* Display feature items in a responsive grid layout */}
                 <div className="flex flex-wrap gap-8 justify-center">
                     {features.map((feature, index) => (
                         <FeatureItem

@@ -1,6 +1,7 @@
-import Question from "./Question";
+import Question from "./Question"; // Importing the Question component that will display each FAQ item
 
 export default function FAQ() {
+    // Array of FAQs containing questions and their corresponding answers
     const faqs = [
         { question: "What is the flight time of your drones?", answer: "Our drones offer a flight time of 30-45 minutes, depending on the model and weather conditions." },
         { question: "Do your drones come with a warranty?", answer: "Yes, all our drones come with a 12-month manufacturer warranty covering defects and malfunctions." },
@@ -16,9 +17,14 @@ export default function FAQ() {
 
     return (
         <section id="FAQ" className="py-20 bg-white">
+            {/* Section Header */}
             <h2 className="text-3xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+
+            {/* FAQ List Wrapper */}
             <div className="flex flex-col max-w-4xl mx-auto">
+                {/* Mapping through the FAQs array and rendering the Question component for each item */}
                 {faqs.map((faq, index) => (
+                    // Passing the question and answer as props to the Question component
                     <Question key={index} question={faq.question} answer={faq.answer} />
                 ))}
             </div>

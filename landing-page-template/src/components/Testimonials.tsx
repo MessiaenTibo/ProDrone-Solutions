@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
 
+// Define the Review interface to ensure consistent data structure
 interface Review {
     name: string;
     image: string;
@@ -10,6 +11,7 @@ interface Review {
     rowSpan: number;
 }
 
+// List of reviews - You can update this with your own testimonials
 const reviews: Review[] = [
     {
         name: "Liam H.",
@@ -63,12 +65,15 @@ const reviews: Review[] = [
 
 
 /**
- * Reorders the review with rowSpan: 6 to appear after the next review on md screens.
+ * Reorders the reviews with rowSpan: 6 to appear after the next review
+ * on medium screens (768px - 1024px wide), ensuring proper layout.
  */
 const reorderReviewsForMd = (reviews: Review[]): Review[] => {
     const updatedReviews = [...reviews];
-    const index = updatedReviews.findIndex(r => r.rowSpan === 6);
+    const index = updatedReviews.findIndex(r => r.rowSpan === 6); // Find the first review with rowSpan: 6
 
+    // Move the review with rowSpan: 6 to the next position
+    // To ensure that it appears in the same row as the review with rowSpan: 4
     if (index > 0 && index < updatedReviews.length - 1) {
         const [movedReview] = updatedReviews.splice(index, 1);
         updatedReviews.splice(index + 1, 0, movedReview);
@@ -78,6 +83,7 @@ const reorderReviewsForMd = (reviews: Review[]): Review[] => {
 };
 
 const Testimonials: React.FC = () => {
+    // State to hold the sorted reviews based on screen size
     const [sortedReviews, setSortedReviews] = useState(reviews);
 
     useEffect(() => {
@@ -85,13 +91,18 @@ const Testimonials: React.FC = () => {
             const screenWidth = window.innerWidth;
 
             if (screenWidth >= 768 && screenWidth < 1024) {
+                // For medium-sized screens (tablet), reorder the reviews
                 setSortedReviews(reorderReviewsForMd(reviews));
             } else {
-                setSortedReviews(reviews); // Reset to default order
+                // For other screen sizes, reset to the default order
+                setSortedReviews(reviews);
             }
         };
 
-        handleResize(); // Run once on mount
+        // Execute the resize function on initial load
+        handleResize();
+
+        // Attach resize event listener to handle future screen size changes
         window.addEventListener("resize", handleResize);
 
         return () => window.removeEventListener("resize", handleResize);
@@ -99,8 +110,12 @@ const Testimonials: React.FC = () => {
 
     return (
         <section id="Testimonials" className="py-20 bg-gray-50">
+            {/* Section Heading */}
             <h2 className="text-3xl font-bold mb-6 text-center">Testimonials</h2>
+
+            {/* Grid Layout for displaying reviews */}
             <div className="grid gap-8 px-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-10 md:max-w-3xl lg:max-w-6xl mx-auto">
+                {/* Loop through sorted reviews and display each using the ReviewCard component */}
                 {sortedReviews.map((review, index) => (
                     <ReviewCard key={index} {...review} />
                 ))}
