@@ -1,4 +1,5 @@
 import React from 'react'; // Importing React
+import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
     // Handle the smooth scroll when a link is clicked
@@ -22,7 +23,9 @@ const Navbar: React.FC = () => {
         <nav className="flex items-center justify-between py-4 px-6 h-16 bg-white shadow">
             {/* Logo or Brand Name */}
             <div>
-                <h1 className="text-xl font-bold">ProDrone Solutions</h1> {/* Displaying the company name with bold and large text */}
+                <h1 className="text-xl font-bold">
+                    <Link to="/">ProDrone Solutions</Link> {/* Displaying the company name with bold and large text */}
+                </h1>
             </div>
 
             {/* Navigation Links */}
