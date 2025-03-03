@@ -15,7 +15,7 @@ interface Review {
 const reviews: Review[] = [
     {
         name: "Liam H.",
-        image: "/src/assets/images/Liam.jpg",
+        image: "Liam.jpg",
         rating: "★★★★★",
         title: "ShadowViper is the best mid-range drone!",
         text: "The ShadowViper exceeded my expectations! The camera quality is fantastic, the flight is stable, and the battery life is impressive for the price. It's perfect for outdoor adventures and captures stunning footage. Highly recommend for hobbyists!",
@@ -23,7 +23,7 @@ const reviews: Review[] = [
     },
     {
         name: "Sophia R.",
-        image: "/src/assets/images/Sophia.jpg",
+        image: "Sophia.jpg",
         rating: "★★★★☆",
         title: "NanoFalcon is great for beginners!",
         text: "As a first-time drone user, the NanoFalcon was super easy to fly. But the battery could last a bit longer.",
@@ -31,7 +31,7 @@ const reviews: Review[] = [
     },
     {
         name: "Daniel K.",
-        image: "/src/assets/images/Daniel.jpg",
+        image: "Daniel.jpg",
         rating: "★★★★★",
         title: "ShadowViper is a solid performer!",
         text: "I’ve used many drones in this price range, and the ShadowViper is by far the best! It handles well even in mild wind conditions and produces smooth, high-quality videos. Great value for the money!",
@@ -39,7 +39,7 @@ const reviews: Review[] = [
     },
     {
         name: "Emma W.",
-        image: "/src/assets/images/Emma.jpg",
+        image: "Emma.jpg",
         rating: "★★★★☆",
         title: "NightOwl is worth every euro!",
         text: "I was hesitant about the price, but the NightOwl is absolutely worth it. The night vision mode is a game-changer, allowing me to capture stunning footage even in low light. The stabilization and GPS tracking are top-tier. Battery life is solid, and the drone is incredibly responsive. If you're serious about drone photography, this is the one to get! Worth every euro!",
@@ -47,7 +47,7 @@ const reviews: Review[] = [
     },
     {
         name: "Noah P.",
-        image: "/src/assets/images/Noah.jpg",
+        image: "Noah.jpg",
         rating: "★★★★★",
         title: "NanoFalcon is my go-to travel drone!",
         text: "I take the NanoFalcon everywhere! It’s small enough to fit in my backpack and easy to launch. Perfect for quick aerial shots while traveling. A bit more flight time would be nice, but overall, I love it!",
@@ -55,7 +55,7 @@ const reviews: Review[] = [
     },
     {
         name: "Olivia M.",
-        image: "/src/assets/images/Olivia.jpg",
+        image: "Olivia.jpg",
         rating: "★★★★★",
         title: "NightOwl is a beast at night!",
         text: "I mainly use my drone for nighttime landscape photography, and the NightOwl delivers in every way! The night vision is crystal clear, the controls are smooth, and the battery life is more than enough for long sessions. Worth the investment!",

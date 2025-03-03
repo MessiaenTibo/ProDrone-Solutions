@@ -12,9 +12,9 @@ interface Drone {
 export default function Drones() {
     // Array of available drones with their properties
     const drones: Drone[] = [
-        { name: "ShadowViper", price: 699, image: "/src/assets/images/ShadowViper.webp", category: "Beginner", description: "The perfect drone for professional results and still beginner friendly." },
-        { name: "NightOwl", price: 1299, image: "/src/assets/images/NightOwl.webp", category: "Advanced", description: "The ultimate drone for day and night photography." },
-        { name: "NanoFalcon", price: 499, image: "/src/assets/images/NanoFalcon.webp", category: "Beginner", description: "A perfect drone for traveling becaus of its small size and low weight." },
+        { name: "ShadowViper", price: 699, image: "ShadowViper.webp", category: "Beginner", description: "The perfect drone for professional results and still beginner friendly." },
+        { name: "NightOwl", price: 1299, image: "NightOwl.webp", category: "Advanced", description: "The ultimate drone for day and night photography." },
+        { name: "NanoFalcon", price: 499, image: "NanoFalcon.webp", category: "Beginner", description: "A perfect drone for traveling becaus of its small size and low weight." },
     ];
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
