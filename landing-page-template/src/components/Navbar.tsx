@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
             </div>
             {/* Navigation Links */}
             <ul className="flex items-center">
-                {!isCartPage ? (
+                {!isCartPage && (
                     // Display these links when NOT on the cart page
                     <>
                         <li className="ml-6">
@@ -60,14 +60,6 @@ const Navbar: React.FC = () => {
                             </a>
                         </li>
                     </>
-                ) : (
-                    // Display home link instead when on the cart page
-                    <li className="ml-6">
-                        <Link to="/" className='group transition duration-300 hover:text-blue-600'>
-                            Home
-                            <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
-                        </Link>
-                    </li>
                 )}
                 {/* Shopping Cart Icon - Always Visible */}
                 <li className="ml-6">
