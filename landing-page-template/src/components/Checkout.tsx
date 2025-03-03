@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function Checkout({ price }: { price: number }) {
     const [promoCodeInputText, setPromoCodeInputText] = useState<string>(""); // The value of the promo code input field (not yet entered by the user)
     const [promoCode, setPromoCode] = useState<string>(""); // The promo code entered by the user
+    const [isValidPromoCode, setIsValidPromoCode] = useState<boolean>(false) // Status to see if a valid promocode is applied
 
     // @ts-ignore
     const [chippingCost, setChippingCost] = useState<number>(); // Replace with your own chipping cost
@@ -20,6 +21,7 @@ export default function Checkout({ price }: { price: number }) {
         // Check if the promo code is valid and set the discount
         if (promoCode.toLowerCase() === "welcome10") {
             setPercentageDiscount(10);
+            setIsValidPromoCode(true);
         }
 
         // Calculate the discount (percentage + flat)
@@ -79,7 +81,7 @@ export default function Checkout({ price }: { price: number }) {
                     <p>Discount {flatDiscount != 0 && (`($${flatDiscount})`)} {percentageDiscount != 0 && (`(${percentageDiscount}%)`)}</p>
                     <p>- ${discount}</p>
                 </div>
-                <p className=" text-xs">Promo code: <b>{promoCode}</b> is applied!</p>
+                {isValidPromoCode && <p className=" text-xs">Promo code: <b>{promoCode}</b> is applied!</p>}
             </div>
             <div className="flex justify-between text-black font-bold">
                 <p>Total</p>
