@@ -19,42 +19,42 @@ const Navbar: React.FC = () => {
         // Navbar container with flexbox for layout, padding, height, background color, and shadow
         <nav className="flex items-center justify-between py-4 px-6 h-16 bg-white shadow">
             {/* Logo or Brand Name */}
-            <div>
+            <div className='flex w-full'>
                 <h1 className="text-xl font-bold">
                     <Link to="/">ProDrone Solutions</Link> {/* Displaying company name as a link */}
                 </h1>
             </div>
             {/* Navigation Links */}
-            <ul className="flex items-center">
+            <ul className="flex items-center text-xs md:text-base font-medium">
                 {!isCartPage && (
                     // Display these links when NOT on the cart page
                     <>
-                        <li className="ml-6">
-                            <a href="#Drones" onClick={(e) => handleLinkClick(e, '#Drones')} className='group transition duration-300 hover:text-blue-600'>
+                        <li className="ml-6 hidden sm:block">
+                            <a href="#Drones" onClick={(e) => handleLinkClick(e, '#Drones')} className='  group transition duration-300 hover:text-blue-600'>
                                 Drones
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
                             </a>
                         </li>
-                        <li className="ml-6">
-                            <a href="#Features" onClick={(e) => handleLinkClick(e, '#Features')} className='group transition duration-300 hover:text-blue-600'>
+                        <li className="ml-6 hidden sm:block">
+                            <a href="#Features" onClick={(e) => handleLinkClick(e, '#Features')} className=' group transition duration-300 hover:text-blue-600'>
                                 Features
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
                             </a>
                         </li>
-                        <li className="ml-6">
-                            <a href="#Testimonials" onClick={(e) => handleLinkClick(e, '#Testimonials')} className='group transition duration-300 hover:text-blue-600'>
+                        <li className="ml-6 hidden sm:block">
+                            <a href="#Testimonials" onClick={(e) => handleLinkClick(e, '#Testimonials')} className=' group transition duration-300 hover:text-blue-600'>
                                 Testimonials
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
                             </a>
                         </li>
-                        <li className="ml-6">
-                            <a href="#FAQ" onClick={(e) => handleLinkClick(e, '#FAQ')} className='group transition duration-300 hover:text-blue-600'>
+                        <li className="ml-6 hidden sm:block">
+                            <a href="#FAQ" onClick={(e) => handleLinkClick(e, '#FAQ')} className=' group transition duration-300 hover:text-blue-600'>
                                 FAQ
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
                             </a>
                         </li>
-                        <li className="ml-6">
-                            <a href="#Contact" onClick={(e) => handleLinkClick(e, '#Contact')} className='group transition duration-300 hover:text-blue-600'>
+                        <li className="ml-6 hidden sm:block">
+                            <a href="#Contact" onClick={(e) => handleLinkClick(e, '#Contact')} className=' group transition duration-300 hover:text-blue-600'>
                                 Contact
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
                             </a>
