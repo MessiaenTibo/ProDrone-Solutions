@@ -87,8 +87,9 @@ function DroneCard({ drone, onBuy }: DroneCardProps) {
                     draggable="false"
                     src={drone.image}
                     alt={`Picture of the ${drone.name} drone`}
-                    className="hover:scale-110 transition-transform duration-500 ease-out"
+                    className="hover:scale-110 transition-transform duration-500 ease-out cursor-pointer"
                     style={{ width: "100%", height: "auto" }}
+                    onClick={() => onBuy(drone)}
                 />
             </div>
             {/* Drone details including category, name, price, and buy button */}
@@ -98,7 +99,7 @@ function DroneCard({ drone, onBuy }: DroneCardProps) {
                 <div className="flex justify-between items-center mt-5">
                     <p className="text-2xl font-bold">${drone.price}</p>
                     <button
-                        className="px-6 py-3 bg-blue-600 text-white rounded-lg"
+                        className="px-6 py-3 bg-blue-600 text-white rounded-lg cursor-pointer"
                         onClick={() => onBuy(drone)}
                     >
                         Buy Now
