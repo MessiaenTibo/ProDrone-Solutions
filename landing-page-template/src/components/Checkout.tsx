@@ -1,11 +1,13 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 
 export default function Checkout({ price }: { price: number }) {
     const [promoCodeInputText, setPromoCodeInputText] = useState<string>(""); // The value of the promo code input field (not yet entered by the user)
     const [promoCode, setPromoCode] = useState<string>(""); // The promo code entered by the user
 
+    // @ts-ignore
     const [chippingCost, setChippingCost] = useState<number>(); // Replace with your own chipping cost
 
+    // @ts-ignore
     const [flatDiscount, setFlatDiscount] = useState<number>(0); // The discount amount ($)
     const [percentageDiscount, setPercentageDiscount] = useState<number>(0); // The discount amount (%)
     const [discount, setDiscount] = useState<number>(0); // The discount amount ($)
