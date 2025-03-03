@@ -128,7 +128,7 @@ function CartModal({ drone, showAnimation, onClose }: CartModalProps) {
         >
             {/* Modal content box with animation effects */}
             <div
-                className={`bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-auto text-center transform transition-transform duration-300 
+                className={`bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-lg w-full max-w-md mx-auto text-center transform transition-transform duration-300 
                     ${showAnimation ? "scale-100" : "scale-95"}`}
                 onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
             >
