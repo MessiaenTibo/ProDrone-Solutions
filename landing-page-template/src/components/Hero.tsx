@@ -58,6 +58,7 @@ const Hero: React.FC = () => {
                         allow="autoplay; fullscreen"
                         loading="eager"
                         referrerPolicy="no-referrer"
+                        tabIndex={-1}
                     ></iframe>
                 </div>
             </div>
@@ -79,7 +80,7 @@ const Hero: React.FC = () => {
                     <a
                         href="#Drones"
                         onClick={(e) => handleLinkClick(e, '#Drones')}
-                        className="px-6 py-3 text-lg bg-blue-600 text-white rounded-lg"
+                        className="px-6 py-3 text-lg font-medium bg-blue-600 text-white rounded-lg border-black focus:border-2 focus:outline-0 hover:bg-blue-700"
                     >
                         Drones
                     </a>

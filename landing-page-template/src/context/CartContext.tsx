@@ -15,6 +15,7 @@ interface CartContextType {
     cart: Drone[];
     addToCart: (drone: Drone) => void;
     removeFromCart: (droneName: string) => void;
+    updateItemCount: (droneName: string, count: number) => void;
     cartCount: number;
 }
 
@@ -24,7 +25,6 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 // Cart Provider component
 export function CartProvider({ children }: { children: ReactNode }) {
     const [cart, setCart] = useState<Drone[]>(() => {
-        // Load cart from localStorage if available
         const storedCart = localStorage.getItem("cartItems");
         return storedCart ? JSON.parse(storedCart) : [];
     });
@@ -36,17 +36,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
             let updatedCart;
 
             if (existingIndex !== -1) {
-                // If drone is already in cart, increase count
                 updatedCart = [...prevCart];
                 updatedCart[existingIndex].count = (updatedCart[existingIndex].count || 1) + 1;
             } else {
-                // Add new drone with count = 1
                 updatedCart = [...prevCart, { ...drone, count: 1 }];
             }
 
-            // Save updated cart to localStorage
             localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-
             return updatedCart;
         });
     };
@@ -60,11 +56,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
         });
     };
 
-    // Total cart count (sum of all drone counts)
+    // Function to update the count of an item in the cart
+    const updateItemCount = (droneName: string, count: number) => {
+        setCart((prevCart) => {
+            const updatedCart = prevCart.map((item) =>
+                item.name === droneName ? { ...item, count } : item
+            );
+
+            localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+            return updatedCart;
+        });
+    };
+
+    // Calculate total cart count
     const cartCount = cart.reduce((total, drone) => total + (drone.count || 1), 0);
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, cartCount }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateItemCount, cartCount }}>
             {children}
         </CartContext.Provider>
     );

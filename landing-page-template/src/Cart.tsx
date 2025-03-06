@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import CartItem from './components/CartItem';
 import Checkout from './components/Checkout';
 import { Link } from 'react-router-dom';
+import { useCart } from './context/CartContext';
 
 interface CartItemProps {
     name: string;
@@ -16,32 +17,26 @@ export default function Cart() {
     const [cartItems, setCartItems] = useState<CartItemProps[]>([]);
     const [total, setTotal] = useState<number>(0);
 
+    const { updateItemCount } = useCart();
+
     useEffect(() => {
         const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
         setCartItems(cart);
-
-        // Initial calculation of the total
         calculateTotal(cart);
     }, []);
 
-    // Function to calculate and update the total price
     const calculateTotal = (cart: CartItemProps[]) => {
-        const cartTotal = cart.reduce((sum: number, item: CartItemProps) => {
-            return sum + item.price * item.count;
-        }, 0);
+        const cartTotal = cart.reduce((sum, item) => sum + item.price * item.count, 0);
         setTotal(cartTotal);
     };
 
-    // Function to update the count of an item in the cart
-    const updateItemCount = (updatedItem: CartItemProps) => {
-        const updatedCart = cartItems.map(item =>
-            item.name === updatedItem.name ? updatedItem : item
+    // Update the item count in the cart
+    const handleUpdateItemCount = (updatedItem: CartItemProps) => {
+        updateItemCount(updatedItem.name, updatedItem.count);
+        setCartItems((prevCart) =>
+            prevCart.map((item) => (item.name === updatedItem.name ? updatedItem : item))
         );
-        setCartItems(updatedCart);
-        localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-
-        // Recalculate the total after updating the cart
-        calculateTotal(updatedCart);
+        calculateTotal([...cartItems]);
     };
 
     return (
@@ -55,20 +50,15 @@ export default function Cart() {
                                 {cartItems.map((item, index) => (
                                     <CartItem
                                         key={index}
-                                        name={item.name}
-                                        price={item.price}
-                                        image={item.image}
-                                        category={item.category}
-                                        description={item.description}
-                                        count={item.count}
-                                        updateItemCount={updateItemCount} // Passing the function to child
+                                        {...item}
+                                        updateItemCount={handleUpdateItemCount}
                                     />
                                 ))}
                             </div>
                         ) : (
-                            <div className='text-center py-20 max-w-[80vw] w-3xl'>
+                            <div className="text-center py-20 max-w-[80vw] w-3xl">
                                 <p className="text-lg font-bold">Your cart is empty</p>
-                                <Link to="/#Drones" className='text-blue-600'>Go shopping</Link>
+                                <Link to="/#Drones" className="text-blue-600">Go shopping</Link>
                             </div>
                         )}
                     </div>

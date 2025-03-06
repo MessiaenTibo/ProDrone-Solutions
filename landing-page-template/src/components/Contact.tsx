@@ -113,7 +113,7 @@ export default function Contact() {
                 </div>
 
                 {/* Submit Button */}
-                <button className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium">Submit</button>
+                <button className="px-6 py-3 bg-blue-600 text-white text-xl font-medium rounded-lg border-black focus:border-2 focus:outline-0 hover:bg-blue-700 transition-colors duration-100">Submit</button>
             </form>
         </section>
     );

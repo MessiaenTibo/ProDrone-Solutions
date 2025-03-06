@@ -85,7 +85,7 @@ export default function Checkout({ price }: { price: number }) {
                         className="w-40 h-10 px-3 py-2 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out"
                     />
                     <button
-                        className="h-10 w-30 px-3 py-2 bg-gray-900 border-gray-900 text-white"
+                        className="h-10 w-30 px-3 py-2 bg-gray-900 border-gray-900 text-white cursor-pointer"
                         onClick={() => setPromoCode(promoCodeInputText)} // Set promoCode when Apply is clicked
                     >
                         Apply
@@ -124,7 +124,7 @@ export default function Checkout({ price }: { price: number }) {
 
             {/* Checkout Button */}
             <button
-                className="w-full mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg"
+                className="px-6 py-3 mt-4 bg-blue-600 text-white font-medium rounded-lg cursor-pointer border-2 border-transparent focus:border-black focus:outline-0 hover:bg-blue-700 transition-colors duration-100"
                 onClick={handleCheckout}
             >
                 Checkout

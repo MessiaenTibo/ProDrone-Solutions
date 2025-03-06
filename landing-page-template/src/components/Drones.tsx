@@ -87,7 +87,7 @@ function DroneCard({ drone, onBuy }: DroneCardProps) {
                 <div className="flex justify-between items-center mt-5">
                     <p className="text-2xl font-bold">${drone.price}</p>
                     <button
-                        className="px-6 py-3 bg-blue-600 text-white rounded-lg cursor-pointer"
+                        className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg border-black focus:border-2 focus:outline-0 hover:bg-blue-700 transition-colors duration-100"
                         onClick={() => onBuy(drone)}
                     >
                         Buy Now
