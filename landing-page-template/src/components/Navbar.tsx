@@ -5,7 +5,7 @@ import { useCart } from "../context/CartContext"; // Import useCart to get the c
 const Navbar: React.FC = () => {
     // Using location to determine if the user is on the cart page
     const location = useLocation();
-    const isCartPage = location.pathname === '/cart'; // Boolean to check if current page is the cart
+    const isHomePage = location.pathname === '/'; // Boolean to check if current page is the cart
 
     // Extracting the cart count from context
     const { cartCount } = useCart(); // Get the number of items in the cart
@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
             </div>
             <ul className="flex items-center text-xs md:text-base font-medium">
                 {/* Navigation links that should only appear when the user is NOT on the cart page */}
-                {!isCartPage && (
+                {isHomePage && (
                     <>
                         {/* Link to Drones section with smooth scroll */}
                         <li className="ml-6 hidden sm:block">
