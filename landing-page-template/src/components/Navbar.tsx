@@ -1,70 +1,50 @@
-import React from 'react'; // Importing React
-import { Link, useLocation } from 'react-router-dom'; // Importing Link for navigation and useLocation to check current route
-import { ShoppingCart } from 'lucide-react'; // Importing shopping cart icon
+import { Link, useLocation } from 'react-router-dom';
+import { ShoppingCart } from 'lucide-react';
+import { useCart } from "../context/CartContext"; // Import useCart
 
 const Navbar: React.FC = () => {
-    const location = useLocation(); // Get current route location
-    const isCartPage = location.pathname === '/cart'; // Check if user is on the cart page
-
-    // Handle smooth scrolling when a link is clicked
-    const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, target: string): void => {
-        event.preventDefault(); // Prevent default anchor link behavior
-        const targetElement = document.querySelector(target) as HTMLElement; // Select target section element
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Smooth scroll to target
-        }
-    };
+    const location = useLocation();
+    const isCartPage = location.pathname === '/cart';
+    const { cartCount } = useCart(); // Get cart count from context
 
     return (
-        // Navbar container with flexbox for layout, padding, height, background color, and shadow
         <nav className="flex items-center justify-between py-4 px-6 h-16 bg-white shadow">
-            {/* Logo or Brand Name */}
             <div className='flex w-full'>
                 <h1 className="text-xl font-bold">
-                    <Link to="/">ProDrone Solutions</Link> {/* Displaying company name as a link */}
+                    <Link to="/">ProDrone Solutions</Link>
                 </h1>
             </div>
-            {/* Navigation Links */}
             <ul className="flex items-center text-xs md:text-base font-medium">
                 {!isCartPage && (
-                    // Display these links when NOT on the cart page
                     <>
                         <li className="ml-6 hidden sm:block">
-                            <a href="#Drones" onClick={(e) => handleLinkClick(e, '#Drones')} className='  group transition duration-300 hover:text-blue-600'>
+                            <a href="#Drones" className='group transition duration-300 hover:text-blue-600'>
                                 Drones
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
                             </a>
                         </li>
                         <li className="ml-6 hidden sm:block">
-                            <a href="#Features" onClick={(e) => handleLinkClick(e, '#Features')} className=' group transition duration-300 hover:text-blue-600'>
+                            <a href="#Features" className='group transition duration-300 hover:text-blue-600'>
                                 Features
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
                             </a>
                         </li>
                         <li className="ml-6 hidden sm:block">
-                            <a href="#Testimonials" onClick={(e) => handleLinkClick(e, '#Testimonials')} className=' group transition duration-300 hover:text-blue-600'>
+                            <a href="#Testimonials" className='group transition duration-300 hover:text-blue-600'>
                                 Testimonials
-                                <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
-                            </a>
-                        </li>
-                        <li className="ml-6 hidden sm:block">
-                            <a href="#FAQ" onClick={(e) => handleLinkClick(e, '#FAQ')} className=' group transition duration-300 hover:text-blue-600'>
-                                FAQ
-                                <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
-                            </a>
-                        </li>
-                        <li className="ml-6 hidden sm:block">
-                            <a href="#Contact" onClick={(e) => handleLinkClick(e, '#Contact')} className=' group transition duration-300 hover:text-blue-600'>
-                                Contact
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-blue-600"></span>
                             </a>
                         </li>
                     </>
                 )}
-                {/* Shopping Cart Icon - Always Visible */}
-                <li className="ml-6">
-                    <Link to="/cart" className='group transition duration-300 hover:text-blue-600'>
+                <li className="ml-6 relative">
+                    <Link to="/cart" className='group transition duration-300 hover:text-blue-600 relative'>
                         <ShoppingCart />
+                        {cartCount > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                                {cartCount}
+                            </span>
+                        )}
                     </Link>
                 </li>
             </ul>
@@ -72,4 +52,4 @@ const Navbar: React.FC = () => {
     );
 };
 
-export default Navbar; // Exporting Navbar component for use in other parts of the application
+export default Navbar;
