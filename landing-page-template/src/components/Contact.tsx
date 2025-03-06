@@ -33,7 +33,7 @@ export default function Contact() {
                     setIsVisible(true); // Trigger fade-in effect when the form is visible in the viewport
                 }
             },
-            { threshold: 0.4 } // Trigger when 40% of the form element is visible in the viewport
+            { threshold: 0.2 } // Trigger when 20% of the form element is visible in the viewport
         );
 
         // Start observing the form element for visibility
@@ -113,7 +113,7 @@ export default function Contact() {
                 </div>
 
                 {/* Submit Button */}
-                <button className="px-6 py-3 bg-blue-600 text-white text-xl font-medium rounded-lg border-black focus:border-2 focus:outline-0 hover:bg-blue-700 transition-colors duration-100">Submit</button>
+                <button className="px-6 py-3 bg-blue-600 text-white text-xl font-medium rounded-lg border-2 border-transparent focus:border-black focus:outline-0 hover:bg-blue-700 transition-colors duration-100">Submit</button>
             </form>
         </section>
     );

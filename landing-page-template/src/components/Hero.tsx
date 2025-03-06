@@ -80,7 +80,7 @@ const Hero: React.FC = () => {
                     <a
                         href="#Drones"
                         onClick={(e) => handleLinkClick(e, '#Drones')}
-                        className="px-6 py-3 text-lg font-medium bg-blue-600 text-white rounded-lg border-black focus:border-2 focus:outline-0 hover:bg-blue-700"
+                        className="px-6 py-3 text-lg font-medium bg-blue-600 text-white rounded-lg border-2 border-transparent focus:border-black focus:outline-0 hover:bg-blue-700"
                     >
                         Drones
                     </a>

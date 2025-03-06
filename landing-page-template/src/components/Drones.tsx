@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useCart } from "../context/CartContext"; // Import global cart context
 
 // Define the Drone interface to enforce type safety
@@ -10,32 +10,29 @@ interface Drone {
     description: string;
 }
 
+// Main Drones Component
 export default function Drones() {
-    const { addToCart } = useCart(); // Use context to update the cart
+    const { addToCart } = useCart();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedDrone, setSelectedDrone] = useState<Drone | null>(null);
+    const [showAnimation, setShowAnimation] = useState(false);
+    const [allVisible, setAllVisible] = useState(false); // New state to track visibility
 
-    // Array of available drones with their properties
     const drones: Drone[] = [
         { name: "ShadowViper", price: 699, image: "ShadowViper.webp", category: "Beginner", description: "The perfect drone for professional results and still beginner friendly." },
         { name: "NightOwl", price: 1299, image: "NightOwl.webp", category: "Advanced", description: "The ultimate drone for day and night photography." },
         { name: "NanoFalcon", price: 499, image: "NanoFalcon.webp", category: "Beginner", description: "A perfect drone for traveling because of its small size and low weight." },
     ];
 
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [selectedDrone, setSelectedDrone] = useState<Drone | null>(null);
-    const [showAnimation, setShowAnimation] = useState<boolean>(false);
-
     const handleBuyDrone = (drone: Drone) => {
-        addToCart(drone); // Add the drone to the global cart state
-
-        // Set the selected drone and open the modal
+        addToCart(drone);
         setSelectedDrone(drone);
         setIsModalOpen(true);
     };
 
-    // Effect to handle animation when modal state changes
     useEffect(() => {
         if (isModalOpen) {
-            setTimeout(() => setShowAnimation(true), 10); // Small delay to trigger animation
+            setTimeout(() => setShowAnimation(true), 10);
         } else {
             setShowAnimation(false);
         }
@@ -46,7 +43,14 @@ export default function Drones() {
             <h2 className="text-3xl font-bold mb-6 text-center">Drones</h2>
             <div className="grid w-fit m-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-20">
                 {drones.map((drone, index) => (
-                    <DroneCard key={index} drone={drone} onBuy={handleBuyDrone} />
+                    <DroneCard
+                        key={index}
+                        index={index}
+                        drone={drone}
+                        onBuy={handleBuyDrone}
+                        setAllVisible={setAllVisible} // Pass function to update visibility
+                        allVisible={allVisible} // Pass visibility state
+                    />
                 ))}
             </div>
 
@@ -62,15 +66,43 @@ export default function Drones() {
     );
 }
 
-// DroneCard component for displaying individual drone details
+// DroneCard Component
 interface DroneCardProps {
     drone: Drone;
+    index: number;
     onBuy: (drone: Drone) => void;
+    setAllVisible: (visible: boolean) => void;
+    allVisible: boolean;
 }
 
-function DroneCard({ drone, onBuy }: DroneCardProps) {
+function DroneCard({ drone, index, onBuy, setAllVisible, allVisible }: DroneCardProps) {
+    const ref = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setAllVisible(true); // If any drone is observed, trigger all
+                }
+            },
+            { threshold: 0.2 }
+        );
+
+        if (ref.current) observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, [setAllVisible]);
+
     return (
-        <div className="shadow rounded-lg bg-white max-w-sm mx-auto overflow-hidden">
+        <div
+            ref={ref}
+            className={`shadow rounded-lg bg-white max-w-sm mx-auto overflow-hidden 
+            transition-all duration-[1000ms] ease-out transform
+            ${allVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}
+            `}
+            style={{
+                transitionDelay: allVisible ? `${index * 200}ms` : "0ms", // Stagger effect
+            }}
+        >
             <div className="overflow-hidden">
                 <img
                     draggable="false"
@@ -87,7 +119,7 @@ function DroneCard({ drone, onBuy }: DroneCardProps) {
                 <div className="flex justify-between items-center mt-5">
                     <p className="text-2xl font-bold">${drone.price}</p>
                     <button
-                        className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg border-black focus:border-2 focus:outline-0 hover:bg-blue-700 transition-colors duration-100"
+                        className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg border-2 border-transparent focus:border-black focus:outline-0 hover:bg-blue-700 transition-colors duration-100"
                         onClick={() => onBuy(drone)}
                     >
                         Buy Now
@@ -98,7 +130,7 @@ function DroneCard({ drone, onBuy }: DroneCardProps) {
     );
 }
 
-// CartModal component to display when a drone is added to the cart
+// CartModal Component
 interface CartModalProps {
     drone: Drone;
     isOpen: boolean;
