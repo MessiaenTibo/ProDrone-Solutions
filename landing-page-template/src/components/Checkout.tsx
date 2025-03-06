@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 export default function Checkout({ price }: { price: number }) {
     const [promoCodeInputText, setPromoCodeInputText] = useState<string>(""); // The value of the promo code input field (not yet entered by the user)
     const [promoCode, setPromoCode] = useState<string>(""); // The promo code entered by the user
-    const [isValidPromoCode, setIsValidPromoCode] = useState<boolean>(false) // Status to see if a valid promocode is applied
+    const [isValidPromoCode, setIsValidPromoCode] = useState<boolean>(false); // Status to see if a valid promo code is applied
+    const [isInvalidPromoCode, setIsInvalidPromoCode] = useState<boolean>(false); // Status to see if an invalid promo code is applied
 
     // @ts-ignore
     const [chippingCost, setChippingCost] = useState<number>(); // Replace with your own chipping cost
@@ -22,6 +23,15 @@ export default function Checkout({ price }: { price: number }) {
         if (promoCode.toLowerCase() === "welcome10") {
             setPercentageDiscount(10);
             setIsValidPromoCode(true);
+            setIsInvalidPromoCode(false); // Reset invalid status
+        } else {
+            // Reset promocode
+            setIsValidPromoCode(false);
+            setPercentageDiscount(0);
+            setFlatDiscount(0);
+            if (promoCode) {
+                setIsInvalidPromoCode(true); // Set invalid status if promoCode is not empty and doesn't match
+            }
         }
 
         // Calculate the discount (percentage + flat)
@@ -36,6 +46,13 @@ export default function Checkout({ price }: { price: number }) {
         setPromoCodeInputText("");
     }, [promoCode]);
 
+    // Remove the error message if the user starts typing
+    const handlePromoCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPromoCodeInputText(e.currentTarget.value);
+        if (isInvalidPromoCode) {
+            setIsInvalidPromoCode(false); // Hide error message if user starts typing again
+        }
+    };
 
     const handleCheckout = () => {
         // Reset the local storage and state
@@ -60,7 +77,7 @@ export default function Checkout({ price }: { price: number }) {
                         id="discount"
                         type="text"
                         value={promoCodeInputText}
-                        onChange={(e) => setPromoCodeInputText(e.currentTarget.value)}
+                        onChange={handlePromoCodeChange}
                         placeholder="welcome10"
                         onKeyDown={(e) => e.key === "Enter" && setPromoCode(promoCodeInputText)} // Set promoCode when Enter is pressed
                         className="w-40 h-10 px-3 py-2 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out"
@@ -69,6 +86,12 @@ export default function Checkout({ price }: { price: number }) {
                         className="h-10 w-30 px-3 py-2 bg-gray-900 border-gray-900 text-white"
                         onClick={() => setPromoCode(promoCodeInputText)} // Set promoCode when Apply is clicked
                     >Apply</button>
+                </div>
+                {/* Container always there to prevent layout shift */}
+                <div className="mt-1 h-1">
+                    {isInvalidPromoCode && (
+                        <p className="text-xs text-red-600">Invalid promo code! Please try again.</p>
+                    )}
                 </div>
             </div>
             <div className="flex justify-between">
